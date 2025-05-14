@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Социальные факторы молодежной преступности</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .chart-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .chart-title {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f5f5f5;
+        }
+
+        nav {
+            background: #2c3e50;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .section {
+            padding: 3rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: #e74c3c;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .timeline-item {
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 3px solid #3498db;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+		
+        /* Стили для списков факторов */
+        .factor-list {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .factor-list ul {
+            padding-left: 2rem;
+        }
+
+        .factor-list li {
+            margin: 1rem 0;
+            color: #34495e;
+        }
+
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        } 
+		.factor-detail {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .factor-detail h4 {
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        .factor-detail p {
+            margin: 0.5rem 0;
+            color: #7f8c8d;
+        }
+
+        .sub-point {
+            margin-left: 1.5rem;
+            list-style-type: circle;
+        }
+           
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#intro">Введение</a></li>
+            <li><a href="#stats">Показатели</a></li>
+            <li><a href="#factors">Факторы</a></li>
+            <li><a href="#causes">Причины</a></li>
+        </ul>
+    </nav>
+
+    <!-- Введение -->
+    <section id="intro" class="section">
+        <h2>Введение</h2>
+        <p>Молодежная преступность остается одной из острых социальных проблем современности. 
+        Этот проект направлен на анализ ключевых факторов, влияющих на формирование преступного 
+        поведения среди подростков, и поиск эффективных мер профилактики.</p>
+    </section>
+
+    <!-- Исторический контекст -->
+    <section id="history" class="section">
+        <h2>Исторический контекст</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>1990-е годы</h3>
+                <p>Рост преступности на фоне социально-экономического кризиса. Формирование первых 
+                организованных молодежных группировок.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2000-е годы</h3>
+                <p>Снижение уровня преступности благодаря стабилизации экономики, но рост киберпреступности 
+                среди молодежи.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>2010-е — настоящее время</h3>
+                <p>Новые вызовы: влияние социальных сетей, цифровизация преступной деятельности, 
+                романтизация криминальной субкультуры.</p>
+            </div>
+        </div>
+    </section>
+
+	<!-- Основные показатели преступности -->
+    <section id="stats" class="section">
+        <h2>Основные показатели</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>5576.3 тыс.</h3>
+                <p>Осужденных в возрасте 14–35 лет (1990–2018)</p>
+            </div>
+            <div class="stat-card">
+                <h3>41%</h3>
+                <p>Доля мелкого хулиганства</p>
+            </div>
+            <div class="stat-card">
+                <h3>36%</h3>
+                <p>Кражи и хищения</p>
+            </div>
+            <div class="stat-card">
+                <h3>57%</h3>
+                <p>Подростки видят распитие алкоголя ежемесячно</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Факторы преступности -->
+    <section id="factors" class="section">
+        <h2>Факторы преступности</h2>
+        
+        <div class="factor-list">
+            <h3>Макросоциальные</h3>
+            <ul>
+                <li>Экономические кризисы и безработица</li>
+                <li>Культурные традиции, романтизирующие криминал</li>
+                <li>Политическая нестабильность</li>
+                <li>Низкий уровень социальной сплоченности</li>
+            </ul>
+        </div>
+
+        <div class="factor-list">
+            <h3>Микросоциальные</h3>
+            <ul>
+                <li>Неблагополучные семьи (алкоголизм, насилие)</li>
+                <li>Влияние асоциальных групп сверстников</li>
+                <li>Отсутствие контроля в учебных заведениях</li>
+                <li>Подстрекательство взрослых преступников</li>
+            </ul>
+        </div>
+
+        <div class="factor-list">
+            <h3>Материальные</h3>
+            <ul>
+                <li>Бедность и отсутствие базовых потребностей</li>
+                <li>Имущественное неравенство</li>
+                <li>Недоступность образования</li>
+            </ul>
+        </div>
+
+        <div class="factor-list">
+            <h3>Экономические</h3>
+            <ul>
+                <li>Инфляция и рост цен</li>
+                <li>Сокращение рабочих мест для молодежи</li>
+                <li>Низкая оплата труда</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Причины подростковой преступности -->
+    <section id="causes" class="section">
+        <h2>Причины возникновения</h2>
+        <div class="factor-list">
+            <ul>
+                <li><span class="highlight">Влияние семьи:</span> 65% правонарушителей из неблагополучных семей</li>
+                <li><span class="highlight">Давление сверстников:</span> 33% подростков указывают это как основную причину</li>
+                <li><span class="highlight">Отсутствие досуга:</span> 70% школ не обеспечивают полноценную внеурочную деятельность</li>
+                <li><span class="highlight">Психологические проблемы:</span> депрессии, агрессия, потребность в самоутверждении</li>
+                <li><span class="highlight">Безнаказанность:</span> 58% опрошенных отмечают слабый контроль за правонарушениями</li>
+            </ul>
+        </div>
+        <div class="stat-card" style="margin-top: 2rem;">
+            <h3>38%</h3>
+            <p>Подростков совершают преступления для "самоутверждения"</p>
+        </div>
+    </section>
+
+    <!-- Динамика распространения -->
+    <section id="dynamics" class="section">
+        <h2>Динамика преступности</h2>
+        <div class="stat-card">
+            <h3>+15%</h3>
+            <p>Рост киберпреступности среди подростков (2015–2023)</p>
+        </div>
+        <div class="stat-card">
+            <h3>-30%</h3>
+            <p>Снижение уличной преступности благодаря программам профилактики</p>
+        </div>
+    </section>
+
+
+	<div class="dashboard">
+
+        <!-- Блок 1 -->
+        <div class="chart-row">
+            <div class="chart-card">
+                <div class="chart-title">Есть ли среди ваших знакомых те, кто совершал правонарушения?</div>
+                <canvas id="chart1"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-title">Какие преступления чаще всего совершают подростки?</div>
+                <canvas id="chart2"></canvas>
+            </div>
+        </div>
+
+        <!-- Блок 2 -->
+        <div class="chart-row">
+            <div class="chart-card">
+                <div class="chart-title">Почему подростки совершают правонарушения?</div>
+                <canvas id="chart3"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-title">Характеристики правонарушителей (10 vs 11 класс)</div>
+                <canvas id="chart6"></canvas>
+            </div>
+        </div>
+
+        <!-- Блок 3 -->
+        <div class="chart-row">
+            <div class="chart-card">
+                <div class="chart-title">Меры воздействия для исправления</div>
+                <canvas id="chart7"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-title">Как часто вы видите распитие алкоголя?</div>
+                <canvas id="chartAlcohol1"></canvas>
+            </div>
+        </div>
+		<!-- Новый блок: Осознанность и ответственность -->
+        <div class="chart-row">
+            <div class="chart-card">
+                <div class="chart-title">Совершают ли подростки правонарушения осознанно?</div>
+                <canvas id="chart4"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Кто должен нести ответственность?</div>
+                <canvas id="chart5"></canvas>
+            </div>
+        </div>
+
+        <!-- Новый блок: Отношение к друзьям-правонарушителям -->
+        <div class="chart-row">
+            <div class="chart-card">
+                <div class="chart-title">Изменится ли ваше отношение к другу-правонарушителю?</div>
+                <canvas id="chart8"></canvas>
+            </div>
+        </div>
+
+        <!-- Новый блок: Алкогольная статистика -->
+        <div class="chart-row">
+            <div class="chart-card">
+                <div class="chart-title">Где чаще всего пьют алкоголь?</div>
+                <canvas id="chartAlcohol2"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Актуальность проблемы продажи алкоголя</div>
+                <canvas id="chartAlcohol5"></canvas>
+            </div>
+        </div>
+    </div>
+
+<script>
+// Общий стиль для всех диаграмм
+const chartOptions = {
+    responsive: true,
+    //maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom' } }
+};
+
+// Диаграмма 1
+new Chart(document.getElementById('chart1'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Да (52%)', 'Нет (46%)', 'Затрудняюсь (2%)'],
+        datasets: [{
+            data: [52, 46, 2],
+            backgroundColor: ['#e74c3c', '#3498db', '#95a5a6']
+        }]
+    },
+    options: chartOptions
+});
+
+// Диаграмма 2
+new Chart(document.getElementById('chart2'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Хулиганство (41%)', 'Кражи (36%)', 'Порча имущества (12%)', 'Вред здоровью (11%)'],
+        datasets: [{
+            data: [41, 36, 12, 11],
+            backgroundColor: ['#2ecc71', '#3498db', '#9b59b6', '#f1c40f']
+        }]
+    },
+    options: chartOptions
+});
+
+// Диаграмма 3
+new Chart(document.getElementById('chart3'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Самоутверждение (38%)', 'Окружение (33%)', 'Невоспитанность (29%)'],
+        datasets: [{
+            data: [38, 33, 29],
+            backgroundColor: ['#e67e22', '#2ecc71', '#3498db']
+        }]
+    },
+    options: chartOptions
+});
+
+// Диаграмма 4: Осознанность
+new Chart(document.getElementById('chart4'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Осознанно (22%)', 'Скорее осознанно (51%)', 'Скорее неосознанно (24%)', 'Неосознанно (3%)'],
+        datasets: [{
+            data: [22, 51, 24, 3],
+            backgroundColor: ['#e74c3c', '#3498db', '#2ecc71', '#95a5a6']
+        }]
+    },
+    options: chartOptions
+});
+
+// Диаграмма 5: Ответственность
+new Chart(document.getElementById('chart5'), {
+    type: 'pie',
+    data: {
+        labels: ['Подросток (95%)', 'Родители (5%)'],
+        datasets: [{
+            data: [95, 5],
+            backgroundColor: ['#2ecc71', '#e74c3c']
+        }]
+    },
+    options: chartOptions
+});
+
+// Диаграмма 6
+new Chart(document.getElementById('chart6'), {
+    type: 'bar',
+    data: {
+        labels: ['Алкоголь/курение', 'Ложь', 'Импульсивность', 'Неблагополучная семья'],
+        datasets: [{
+            label: '10 класс',
+            data: [23, 20, 22, 19],
+            backgroundColor: '#3498db'
+        },{
+            label: '11 класс',
+            data: [22, 23, 21, 18],
+            backgroundColor: '#e74c3c'
+        }]
+    },
+    options: {
+        ...chartOptions,
+        scales: { x: { stacked: false }, y: { max: 25 } }
+    }
+});
+
+// Диаграмма 7
+new Chart(document.getElementById('chart7'), {
+    type: 'bar',
+    data: {
+        labels: ['10 класс', '11 класс'],
+        datasets: [{
+            label: 'Уголовное наказание',
+            data: [50, 47],
+            backgroundColor: '#3498db'
+        },{
+            label: 'Другие меры',
+            data: [50, 53],
+            backgroundColor: '#2ecc71'
+        }]
+    },
+    options: chartOptions
+});
+
+// Диаграмма 8: Отношение к друзьям
+new Chart(document.getElementById('chart8'), {
+    type: 'bar',
+    data: {
+        labels: ['10 класс', '11 класс'],
+        datasets: [{
+            label: 'Ухудшится',
+            data: [76, 67],
+            backgroundColor: '#e74c3c'
+        }, {
+            label: 'Зависит от ситуации',
+            data: [24, 33],
+            backgroundColor: '#3498db'
+        }]
+    },
+    options: chartOptions
+});
+
+// Диаграмма Alcohol2: Места употребления
+new Chart(document.getElementById('chartAlcohol2'), {
+    type: 'bar',
+    data: {
+        labels: ['Парки (42%)', 'Дворы (36%)', 'Квартиры (22%)'],
+        datasets: [{
+            label: 'Процент ответов',
+            data: [42, 36, 22],
+            backgroundColor: ['#2ecc71', '#3498db', '#9b59b6']
+        }]
+    },
+    options: chartOptions
+});
+
+// Диаграмма Alcohol5: Актуальность продажи
+new Chart(document.getElementById('chartAlcohol5'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Актуальна (90%)', 'Скорее актуальна (10%)'],
+        datasets: [{
+            data: [90, 10],
+            backgroundColor: ['#e74c3c', '#3498db']
+        }]
+    },
+    options: chartOptions
+});
+
+// Диаграмма Alcohol1
+new Chart(document.getElementById('chartAlcohol1'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Несколько раз в месяц (57%)', 'Каждую неделю (43%)'],
+        datasets: [{
+            data: [57, 43],
+            backgroundColor: ['#e74c3c', '#3498db']
+        }]
+    },
+    options: chartOptions
+});
+</script>
+
+    <script>
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = document.querySelector(this.getAttribute('href'));
+                section.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
